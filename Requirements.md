@@ -20,12 +20,12 @@ The Audit Logging Service is a stand-alone microservice designed to receive, sto
 ### 3.1. Audit Log Data Model
 
 Each audit log entry must include:
-- **id**: Unique identifier (UUID)
+- **id**: Unique identifier (Long)
 - **timestamp**: When the event occurred
 - **serviceName**: Name of the originating service
 - **eventType**: Type of event (e.g., CREATE, UPDATE, DELETE, LOGIN, ERROR)
 - **entityType**: Type of entity affected (e.g., User, Order)
-- **entityId**: Identifier of the affected entity (string/UUID)
+- **entityId**: Identifier of the affected entity (string)
 - **userId**: Identifier of the user who triggered the event (optional)
 - **details**: Free-form JSON or string for event details (e.g., changes, metadata)
 - **status**: (Optional) Outcome of the event (e.g., SUCCESS, FAILURE)

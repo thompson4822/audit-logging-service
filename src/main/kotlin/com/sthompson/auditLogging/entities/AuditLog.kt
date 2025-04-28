@@ -21,19 +21,19 @@ class AuditLog : PanacheEntity() {
     companion object : PanacheCompanion<AuditLog> {
         private val objectMapper = ObjectMapper()
 
-        fun findByTimeRange(start: Instant, end: Instant) = 
+        fun findByTimeRange(start: Instant, end: Instant) =
             find("timestamp between ?1 and ?2", start, end).list()
 
-        fun findByService(serviceName: String) = 
+        fun findByService(serviceName: String) =
             find("serviceName", serviceName).list()
 
-        fun findByEntity(entityType: String, entityId: String) = 
+        fun findByEntity(entityType: String, entityId: String) =
             find("entityType = ?1 and entityId = ?2", entityType, entityId).list()
 
-        fun findByUser(userId: String) = 
+        fun findByUser(userId: String) =
             find("userId", userId).list()
 
-        fun findByStatus(status: AuditStatus) = 
+        fun findByStatus(status: AuditStatus) =
             find("status", status).list()
     }
 
@@ -59,7 +59,7 @@ class AuditLog : PanacheEntity() {
     @Enumerated(EnumType.STRING)
     var status: AuditStatus = AuditStatus.SUCCESS
 
-    @Column(columnDefinition = "jsonb")
+    @Column
     @JdbcTypeCode(SqlTypes.JSON)
     var details: JsonNode? = null
 

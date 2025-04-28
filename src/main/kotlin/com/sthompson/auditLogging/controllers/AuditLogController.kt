@@ -10,7 +10,7 @@ import jakarta.ws.rs.core.MediaType
 import jakarta.ws.rs.core.Response
 import java.time.Instant
 
-@Path("/api/v1/audit-logs")
+@Path("/audit-logs")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @ApplicationScoped
@@ -64,7 +64,7 @@ class AuditLogController(private val auditLogService: AuditLogService) {
             userId = userId,
             status = status
         )
-        
+
         val response = auditLogService.searchAuditLogs(filter, page, size)
         return Response.ok(response).build()
     }

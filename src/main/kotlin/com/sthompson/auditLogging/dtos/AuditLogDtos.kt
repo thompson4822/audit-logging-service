@@ -2,15 +2,34 @@ package com.sthompson.auditLogging.dtos
 
 import com.sthompson.auditLogging.entities.AuditStatus
 import java.time.Instant
+import jakarta.validation.constraints.*
 
 data class CreateAuditLogRequest(
+    @field:NotBlank(message = "Service name is required")
+    @field:Size(max = 100, message = "Service name cannot exceed 100 characters")
     val serviceName: String,
+
+    @field:NotBlank(message = "Event type is required")
+    @field:Size(max = 50, message = "Event type cannot exceed 50 characters")
     val eventType: String,
+
+    @field:NotBlank(message = "Entity type is required")
+    @field:Size(max = 100, message = "Entity type cannot exceed 100 characters")
     val entityType: String,
+
+    @field:NotBlank(message = "Entity ID is required")
+    @field:Size(max = 100, message = "Entity ID cannot exceed 100 characters")
     val entityId: String,
+
+    @field:NotBlank(message = "User ID is required")
+    @field:Size(max = 100, message = "User ID cannot exceed 100 characters")
     val userId: String,
+
     val status: AuditStatus = AuditStatus.SUCCESS,
+
     val details: Map<String, Any>? = null,
+
+    @field:Size(max = 500, message = "Message cannot exceed 500 characters")
     val message: String? = null
 )
 
