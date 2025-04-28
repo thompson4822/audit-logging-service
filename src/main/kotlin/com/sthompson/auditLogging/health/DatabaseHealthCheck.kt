@@ -9,11 +9,14 @@ import javax.sql.DataSource
 
 @ApplicationScoped
 @Readiness
-class DatabaseHealthCheck(@Inject private val dataSource: DataSource) : HealthCheck {
-    
+class DatabaseHealthCheck : HealthCheck {
+
+    @Inject
+    lateinit var dataSource: DataSource
+
     override fun call(): HealthCheckResponse {
         val builder = HealthCheckResponse.builder().name("Database connection health check")
-        
+
         try {
             dataSource.connection.use { connection ->
                 if (connection.isValid(5)) {
@@ -25,7 +28,7 @@ class DatabaseHealthCheck(@Inject private val dataSource: DataSource) : HealthCh
         } catch (e: Exception) {
             builder.down().withData("error", e.message ?: "Unknown error")
         }
-        
+
         return builder.build()
     }
 }
